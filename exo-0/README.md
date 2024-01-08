@@ -27,3 +27,4 @@ Décommenter la ligne puis recharger la page.
 ```
 
 Que se passe-t-il et pourquoi ?
+myVariable is not defined et parce il était pas definie.
