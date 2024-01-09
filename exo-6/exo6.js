@@ -22,38 +22,118 @@ joeInfo.garage = true
 console.log(joeInfo)
 
 
-var football = {
-    equipe: "grenoble foot",
-    nombreJoueur: 23,
-    stade: true,
-    trophe: ["ligue2", "coupe de france"],
-}
-
 const team = {
-    players: {
-        firstName: "Pablo",
-        lastName: "Sanchez",
-        age: 11
+
+    players: [
+        {
+            firstName: "Pablo",
+            lastName: "Sanchez",
+            age: 11
+        },
+        {
+            firstName: "Alicia",
+            lastName: "Gomez",
+            age: 12
+        }
+    ],
+
+    games: [
+        {
+            opponent: "Broncos",
+            teamPoints: 42,
+            opponentPoints: 27
+        },
+        {
+            opponent: "Raiders",
+            teamPoints: 35,
+            opponentPoints: 30
+        }
+    ],
+
+    addPlayer: function (firstName, lastName, age) {
+        //this pour faire reference a l'objet team
+        this.players.push({
+            //creation des nouvels objets players
+            firstName: firstName,
+            lastName: lastName,
+            age: age,
+        })
     },
 
-    game: {
-        opponent: "Broncos",
-        teamPoints: 42,
-        opponentPoints: 27
-    },
-    
+    addGame: function (opponent, teamPoints, opponentPoints) {
+        this.games.push({
+            opponent: opponent,
+            teamPoints: teamPoints,
+            opponentPoints: opponentPoints,
+        })
+    }
 };
 
-function addPlayer (firstName, lastName, age) {
-    team(this, firstName, lastName, age)
-    console.log('method player')
-}
 
-function match (opponent, teamPoints, opponentPoints){
-    console.log('method match')
-    team(this, opponent, teamPoints, opponentPoints)
-}
+// Ajouter plusieurs joueurs
+team.addPlayer("Joueur1", "Nom1", 28)
+team.addPlayer("Joueur2", "Nom2", 25)
+team.addPlayer("Joueur3", "Nom3", 30)
 
-const polm = new addPlayer("polm", "pok", 22)
+// Ajouter plusieurs matchs
+// "adversaire", "mesPoints", "adversairePoint"
+team.addGame("Match1", 45, 39)
+team.addGame("ÉquipeA", 30, 35)
+team.addGame("ÉquipeB", 38, 42)
+team.addGame("ÉquipeC", 46, 30)
 
-console.log(addPlayer)
+
+/* point de mon equipe */
+team.calculateTotalPoints = function () {
+    let totalPoints = 0;
+
+    // Parcourir de (0 a this.games.length (length le nombre de games))le tableau de matchs et calculer les points de l'équipe
+    for (let i = 0; i < this.games.length; i++) {
+        totalPoints += this.games[i].teamPoints;
+    }
+
+    return totalPoints;
+};
+
+console.log("Total des points de mon l'equipe :", team.calculateTotalPoints());
+
+
+
+
+/* moyenne point adversaire */
+team.calculateAverageOpponentPoints = function () {
+    let totalOpponentPoints = 0;
+
+    // Parcourir le tableau de matchs et calculer
+    for (let i = 0; i < this.games.length; i++) {
+        totalOpponentPoints += this.games[i].opponentPoints;
+    }
+
+    // Calculer la moyenne en divisent par le nombre total de matchs (this.games.length)
+    const averageOpponentPoints = totalOpponentPoints / this.games.length;
+
+    /* pour arrondire */
+    const roundAvarage = Math.round(averageOpponentPoints)
+    return roundAvarage;
+};
+console.log("Moyenne des points de l'équipe adverse : " + team.calculateAverageOpponentPoints());
+
+
+
+
+/* le plus age */
+team.findOldestPlayer = function () {
+
+    /* prende reference du joueur1 */
+    var oldestPlayer = this.players[0];
+
+    for (var i = 1; i < this.players.length; i++) {
+        if (this.players[i].age > oldestPlayer.age) {
+            oldestPlayer = this.players[i];
+        }
+    }
+
+    return oldestPlayer;
+};
+
+console.log("Le joueur le plus âgé est : ", team.findOldestPlayer());
