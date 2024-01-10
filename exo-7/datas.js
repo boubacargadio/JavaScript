@@ -55,3 +55,6 @@ var jsonDatas=[
 		"quantity" : 200
 	}
 ]
+jsonDatas["type"] = "type traduit"
+
+// console.table(jsonDatas)

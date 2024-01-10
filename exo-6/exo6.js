@@ -108,7 +108,6 @@ team.calculateAverageOpponentPoints = function () {
     for (let i = 0; i < this.games.length; i++) {
         totalOpponentPoints += this.games[i].opponentPoints;
     }
-
     // Calculer la moyenne en divisent par le nombre total de matchs (this.games.length)
     const averageOpponentPoints = totalOpponentPoints / this.games.length;
 
@@ -136,4 +135,4 @@ team.findOldestPlayer = function () {
     return oldestPlayer;
 };
 
-console.log("Le joueur le plus âgé est : ", team.findOldestPlayer());
+console.log("Le joueur le plus age est : ", team.findOldestPlayer());
